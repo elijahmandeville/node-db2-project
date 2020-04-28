@@ -20,7 +20,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const { make, model, vin, mileage, isLemon } = req.body;
+  const { make, model, vin, mileage, isLemon, transType, title } = req.body;
 
   try {
     const payload = {
@@ -29,6 +29,8 @@ router.post("/", async (req, res, next) => {
       model,
       mileage,
       isLemon,
+      transType,
+      title,
     };
 
     const [id] = await db("cars").insert(payload);
@@ -41,7 +43,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.put("/:id", async (req, res, next) => {
-  const { make, model, vin, mileage, isLemon } = req.body;
+  const { make, model, vin, mileage, isLemon, transType, title } = req.body;
 
   try {
     const payload = {
@@ -50,6 +52,8 @@ router.put("/:id", async (req, res, next) => {
       model,
       mileage,
       isLemon,
+      transType,
+      title,
     };
 
     await db("cars").where("id", req.params.id).update(payload);
